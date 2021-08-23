@@ -3,6 +3,8 @@ import helmet from "helmet";
 import dotenv from "dotenv";
 import path from "path";
 import morgan from "morgan";
+import errorHandler from "./middleware/errorHandler";
+import initRoutes from "./router";
 import initMongoose from "./db/init";
 
 const app = express();
@@ -20,6 +22,10 @@ app.use(morgan("tiny"));
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
+initRoutes(app);
+
+app.use(errorHandler);
 
 // Create connection
 const port = process.env.PORT;

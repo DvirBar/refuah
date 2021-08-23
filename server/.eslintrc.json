@@ -17,7 +17,12 @@
     "rules": {
         "quotes": ["error", "double"],
         "import/no-unresolved": "off",
-        "import/extensions": "off"
+        "import/extensions": "off",
+        "no-unused-vars": "off",
+        "no-underscore-dangle": "off",
+        "no-param-reassign": ["error", { "props": false }],
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": ["error"]
     },
     "settings": {
         "import/resolver": {
