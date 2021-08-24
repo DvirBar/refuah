@@ -15,7 +15,7 @@ describe("test splitSentence function", () => {
     });
 
     test("should throw error when only white space string is sent", () => {
-        expect(() => {splitSentence(" ");}).toThrow(NoBlankWhitespace);
-        expect(() => {splitSentence("  ");}).toThrow(NoBlankWhitespace);
+        expect(() => { splitSentence(" "); }).toThrow(NoBlankWhitespace);
+        expect(() => { splitSentence("  "); }).toThrow(NoBlankWhitespace);
     });
-}); 
+});
