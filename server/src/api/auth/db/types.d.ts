@@ -1,3 +1,4 @@
+import { EnhancedModel } from "db/types";
 import { Document, Model, Schema } from "mongoose";
 
 export interface UserSecureDetails {
@@ -19,12 +20,7 @@ export interface IUser extends Document, UserSecureDetails {
     };
 }
 
-// export interface UserModel extends Model<IUser> {
-// }
-
-export interface UserModel extends Model<IUser> {
-    getByIdOrFail: (this: Model<IUser>, id: string) => Promise<IUser>
-}
+export type UserModel = EnhancedModel<IUser>;
 
 export interface UserMethods {
     getUserByEmail: (this: UserModel, email: string) => Promise<IUser | null>;

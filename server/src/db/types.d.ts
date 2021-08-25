@@ -9,5 +9,5 @@ export interface StaticMethodsOptions {
 }
 
 export interface EnhancedModel<T> extends Model<T> {
-    getByIdOrFail: (this: Model<Schema>, id: string) => Promise<Document<T>>
+    getByIdOrFail: (this: Model<T>, id: string) => Promise<T>
 }
