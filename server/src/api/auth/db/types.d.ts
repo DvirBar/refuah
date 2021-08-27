@@ -1,5 +1,5 @@
-import { EnhancedModel } from "db/types";
 import { Document, Model, Schema } from "mongoose";
+import { UserEdit } from "./methods";
 
 export interface UserSecureDetails {
     firstName: string;
@@ -10,7 +10,7 @@ export interface UserSecureDetails {
     dateCreated?: Date;
 }
 
-export interface IUser extends Document, UserSecureDetails {
+export interface IUser extends UserSecureDetails {
     password: string;
     formerPasswords?: string;
     failedAttempts?: number;
@@ -20,17 +20,15 @@ export interface IUser extends Document, UserSecureDetails {
     };
 }
 
-export type UserModel = EnhancedModel<IUser>;
+export type UserDoc = IUser & Document<IUser>
 
-export interface UserMethods {
-    getUserByEmail: (this: UserModel, email: string) => Promise<IUser | null>;
-    createUser: (this: UserModel, userDetails: IUser) => Promise<IUser>;
-    editUser: (this: UserModel, userId: string, userDetails: IUser) => Promise<IUser>;
-    isUserBlocked: (user: IUser) => boolean;
-    blockUser: (user: IUser, expiry?: Date) => Promise<IUser>;
-    addFailedAttempt: (user: IUser) => Promise<number>;
-    resetFailedAttempts: (user: IUser) => Promise<IUser>;
-    removeUser: (this: UserModel, userId: string) => Promise<void>;
+export interface UserModel extends Model<IUser> {
+    getUserByEmail: (this: Model<IUser>, email: string) => Promise<UserDoc | null>;
+    createUser: (this: Model<IUser>, userDetails: IUser) => Promise<UserDoc>;
+    editUser: (this: Model<IUser>, userId: string, userDetails: UserEdit) => Promise<UserDoc>;
+    isUserBlocked: (user: UserDoc) => Promise<boolean>;
+    blockUser: (user: UserDoc, expiry?: Date) => Promise<UserDoc>;
+    addFailedAttempt: (user: UserDoc) => Promise<number>;
+    resetFailedAttempts: (user: UserDoc) => Promise<UserDoc>;
+    removeUser: (this: Model<IUser>, userId: string) => Promise<void>;
 }
-
-export type UserType = UserModel & UserMethods;

@@ -1,6 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { ConstructStaticMethods } from "../../../db/plugins";
-import { IUser, UserMethods, UserType } from "./types";
+import { IUser, UserModel } from "./types";
 import { validateEmail, validateName } from "./validation";
 import * as staticMethods from "./methods";
 
@@ -28,6 +27,7 @@ export const UserSchema = new Schema<IUser>({
             message: "Email is invalid",
         },
         required: [true, "Email is required"],
+        unique: true,
     },
     failedAttempts: {
         type: Number,
@@ -59,9 +59,6 @@ export const UserSchema = new Schema<IUser>({
 });
 
 // Define static methods
-UserSchema.plugin(
-  ConstructStaticMethods as any,
-  { customStaticMethods: staticMethods },
-);
+UserSchema.statics = staticMethods;
 
-export default mongoose.model<IUser>("User", UserSchema);
+export default mongoose.model<IUser, UserModel>("User", UserSchema);

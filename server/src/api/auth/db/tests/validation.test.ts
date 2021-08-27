@@ -35,6 +35,10 @@ describe("test name validation", () => {
         it("should accept Hebrew multiple word names", () => {
             expect(validateName("דן שרון")).to.be.true;
         });
+
+        it("should accept dashes", () => {
+            expect(validateName("דן שר-ון")).to.be.true;
+        });
     });
 
     describe("test invalid values", () => {

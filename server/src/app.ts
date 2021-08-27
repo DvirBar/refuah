@@ -12,7 +12,7 @@ app.use(helmet());
 
 // Setup environment variables
 dotenv.config({
-  path: path.resolve("env", `.env.${process.env.NODE_ENV}`),
+    path: path.resolve("env", `.env.${process.env.NODE_ENV}`),
 });
 
 // Middlewares
@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(morgan("tiny"));
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+    app.use(express.static("client/build"));
 }
 
 initRoutes(app);
