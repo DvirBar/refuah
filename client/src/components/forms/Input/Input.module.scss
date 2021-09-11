@@ -1,0 +1,67 @@
+@import "src/styles/vars.scss";
+
+.inputWrapper {
+    color: $color-secondary;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease-in-out;
+
+    &.error {
+        & > .inputContainer {
+            border-color: $color-danger;
+        }
+        color: $color-danger;
+    }
+}
+
+.focus {
+    color: $color-main;
+}
+
+.inputContainer {
+    border: 2px solid $color-secondary;
+    padding: 0 0.5rem;
+    height: 4rem;
+    border-radius: 4px;
+    color: $color-secondary;
+    margin-bottom: 0.5rem;
+    display: flex;
+    transition: all 0.2s ease-in-out;
+    transition: border 100ms ease-out;
+}
+
+.readonly {
+    cursor: pointer !important;
+}
+
+.inputContainerFocus {
+    border-color: $color-main;
+    color: $color-main;
+    border-width: 3.5px;
+}
+
+.input {
+    border: none;
+    color: $color-secondary;
+    flex: 1;
+    padding: 0 0.5rem;
+
+    &:read-only {
+        cursor: pointer;
+    }
+}
+
+.inputChip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.label {
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+}
+
+.errorText {
+    font-size: 1.3rem;
+}
