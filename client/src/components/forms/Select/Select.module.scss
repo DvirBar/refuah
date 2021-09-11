@@ -1,0 +1,17 @@
+@import "src/styles/vars.scss";
+
+.select {
+    min-width: 10rem;
+}
+
+.selectInput {
+    width: 100%;
+}
+
+.optionsContainer {
+    padding: 1rem 0;
+    border-radius: 4px;
+    box-shadow: 0px 3px 6px $color-main-opacity-background;
+    max-height: 30rem;
+    overflow-y: auto;
+}
