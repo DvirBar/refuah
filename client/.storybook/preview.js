@@ -1,4 +1,6 @@
-export const parameters = {
+import "../src/styles/App.css"
+
+export const parameters = { 
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {

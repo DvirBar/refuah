@@ -1,0 +1,55 @@
+@font-face {
+    font-family: "NotoSansHebrew";
+    src: url("../assets/fonts/NotoSansHebrew/NotoSansHebrew-Regular.ttf")
+        format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "NotoSansHebrew";
+    src: url("../assets/fonts/NotoSansHebrew/NotoSansHebrew-Light.ttf")
+        format("truetype");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "NotoSansHebrew";
+    src: url("../assets/fonts/NotoSansHebrew/NotoSansHebrew-Bold.ttf")
+        format("truetype");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "NotoSansHebrew";
+    src: url("../assets/fonts/NotoSansHebrew/NotoSansHebrew-ExtraBold.ttf")
+        format("truetype");
+    font-weight: 600;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "NotoSansHebrew", sans-serif !important;
+    outline: none;
+}
+
+html {
+    font-size: 10px;
+    direction: rtl;
+}
+
+body {
+    scroll-behavior: smooth;
+}
+
+body,
+input,
+button {
+    font-size: 1.6rem;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}

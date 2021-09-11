@@ -53,7 +53,10 @@
         "react/style-prop-object": "off",
         "arrow-parens": "off",
         "@typescript-eslint/no-var-requires": "off",
-        "react/jsx-props-no-spreading": "off"
+        "react/jsx-props-no-spreading": "off",
+        "import/no-extraneous-dependencies": "off",
+        "no-plusplus": "off",
+        "@typescript-eslint/no-empty-function": "off"
     },
     "settings": {
         "import/resolver": {
