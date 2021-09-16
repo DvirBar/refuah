@@ -1,0 +1,21 @@
+.nameBlock {
+    display: flex;
+    justify-content: space-between;
+
+    & > * {
+        flex: 1;
+
+        &:first-child {
+            margin-left: 1.5rem;
+        }
+
+        &:last-child {
+            margin-right: 1.5rem;
+        }
+    }
+}
+
+.button {
+    margin-top: 3rem;
+    align-self: center;
+}

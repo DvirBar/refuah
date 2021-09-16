@@ -1,0 +1,16 @@
+.register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    align-self: center;
+}
+
+.navAuth {
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,21 @@
+@import "src/styles/vars.scss";
+
+.login {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    align-self: center;
+}
+
+.navAuth {
+    margin-top: 7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.noUserText {
+    margin-bottom: 2rem;
+}

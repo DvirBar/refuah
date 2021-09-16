@@ -1,0 +1,13 @@
+@import "src/styles/vars.scss";
+
+.registerLink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $color-main;
+    cursor: pointer;
+}
+
+.text {
+    font-size: 2.2rem;
+}
