@@ -1,0 +1,26 @@
+.container {
+    background-color: #ebebeb;
+}
+
+.showcase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    position: relative;
+}
+
+.showcaseItem {
+    flex: 1;
+    width: 40rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & > * {
+        flex: 1;
+    }
+
+    @media only screen and(max-width: 450px) {
+        width: 95%;
+    }
+}

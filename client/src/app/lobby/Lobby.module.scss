@@ -1,0 +1,21 @@
+@import "src/styles/vars.scss";
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.rightPanel {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.leftPanel {
+    background-color: $color-main;
+    height: 100%;
+    color: #fff;
+    width: 70rem;
+}

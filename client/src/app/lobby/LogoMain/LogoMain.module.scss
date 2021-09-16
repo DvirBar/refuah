@@ -1,0 +1,20 @@
+@import "src/styles/vars.scss";
+
+.logo {
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    position: absolute;
+    background-color: #ebebeb;
+    padding: 2rem;
+}
+
+.logoImage {
+    height: 65px;
+}
+
+.logoText {
+    color: $color-main;
+    font-size: 3.5rem;
+    margin-right: 1rem;
+}
