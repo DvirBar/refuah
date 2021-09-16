@@ -3,6 +3,8 @@ import useKeyboardNavigation from "components/utils/controls/useKeyboardNavigati
 import useOnClickOutside from "components/utils/layout/useOnClickOutside";
 import React, { useRef, useState } from "react";
 import { ChevronDown } from "react-feather";
+import composeClassNames from "styles/composeClassNames";
+import { Transition, TransitionStatus } from "react-transition-group";
 import Input from "../Input/Input";
 import { OptionProps } from "./Option";
 import styles from "./Select.module.scss";
@@ -98,6 +100,17 @@ function Select({
     }
   };
 
+  const style = {
+    transition: `opacity ${200}ms ease-in-out`,
+    opacity: 0,
+  };
+  const transitionStyles: { [key in TransitionStatus]?: { opacity: number } } = {
+    entering: { opacity: 1 },
+    entered: { opacity: 1 },
+    exiting: { opacity: 0 },
+    exited: { opacity: 0 },
+  };
+
   return (
     <div
       ref={parentRef}
@@ -119,26 +132,28 @@ function Select({
         onChange={e => onChange(e)}
         onClick={() => setIsOpen(!isOpen)}
         label={label}
-        endChip={<ChevronDown />}
+        endChip={<ChevronDown className={composeClassNames(styles.chevron, isOpen ? styles.flip : "")} />}
       />
-      {isOpen
-        && (
-        <ul
-          tabIndex={-1}
-          ref={listRef}
-          className={styles.optionsContainer}
-        >
-          {React.Children.map(children, (child, index) => React.cloneElement<OptionProps>(child, {
-            onClick: handleClick,
-            selectedValue: value,
-            isFocused: index === focusedIndex,
-            parentTop: listRef.current?.offsetTop,
-            parentHeight: listRef.current?.offsetHeight,
-            parentScrollTop: listRef.current?.scrollTop,
-            scrollParent,
-          }))}
-        </ul>
+      <Transition unmountOnExit in={isOpen} timeout={200}>
+        {state => (
+          <ul
+            tabIndex={-1}
+            ref={listRef}
+            style={{ ...style, ...transitionStyles[state] }}
+            className={styles.optionsContainer}
+          >
+            {React.Children.map(children, (child, index) => React.cloneElement<OptionProps>(child, {
+              onClick: handleClick,
+              selectedValue: value,
+              isFocused: index === focusedIndex,
+              parentTop: listRef.current?.offsetTop,
+              parentHeight: listRef.current?.offsetHeight,
+              parentScrollTop: listRef.current?.scrollTop,
+              scrollParent,
+            }))}
+          </ul>
         )}
+      </Transition>
 
     </div>
   );

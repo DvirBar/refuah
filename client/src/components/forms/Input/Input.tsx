@@ -13,7 +13,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     startChip?: React.ReactNode,
     endChip?: React.ReactNode,
     isFocused?: boolean
-    readOnly: boolean
+    readOnly?: boolean
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref): JSX.Element => {

@@ -15,3 +15,11 @@
     max-height: 30rem;
     overflow-y: auto;
 }
+
+.chevron {
+    transition: transform 200ms ease-in-out;
+}
+
+.flip {
+    transform: rotate(180deg);
+}

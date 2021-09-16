@@ -11,23 +11,23 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 export const ButtonMain = Template.bind({});
 ButtonMain.args = {
-  label: "כפתור",
+  children: "כפתור",
 };
 
 export const ButtonDanger = Template.bind({});
 ButtonDanger.args = {
-  label: "כפתור",
+  children: "כפתור",
   variant: "danger",
 };
 
 export const ButtonSuccess = Template.bind({});
 ButtonSuccess.args = {
-  label: "כפתור",
+  children: "כפתור",
   variant: "success",
 };
 
 export const ButtonSecondary = Template.bind({});
 ButtonSecondary.args = {
-  label: "כפתור",
+  children: "כפתור",
   variant: "secondary",
 };
