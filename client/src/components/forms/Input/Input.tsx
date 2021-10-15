@@ -1,19 +1,20 @@
 /* eslint-disable no-undef */
 import React, { InputHTMLAttributes, useState } from "react";
 import composeClassNames from "styles/composeClassNames";
+import InputError from "../InputError/InputError";
 import styles from "./Input.module.scss";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-    onChange: (e: React.ChangeEvent<{value: string | number}>) => void,
-    onClick?: (e: React.MouseEvent) => void,
-    value: number | string | undefined,
-    name: string,
-    label: string,
-    error?: string,
-    startChip?: React.ReactNode,
-    endChip?: React.ReactNode,
-    isFocused?: boolean
-    readOnly?: boolean
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onClick?: (e: React.MouseEvent) => void;
+    value: number | string | undefined;
+    name: string;
+    label: string;
+    error?: string;
+    startChip?: React.ReactNode;
+    endChip?: React.ReactNode;
+    isFocused?: boolean;
+    readOnly?: boolean;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref): JSX.Element => {
@@ -47,7 +48,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref): JSX.E
         readOnly ? styles.readonly : "",
       )}
     >
-      <span className={styles.label}>
+      <span className={composeClassNames(
+        styles.label,
+        isElementFocused ? styles.labelFocused : "",
+      )}
+      >
         {label}
       </span>
       <div className={composeClassNames(
@@ -76,8 +81,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref): JSX.E
           </div>
           )}
       </div>
-
-      <span className={styles.errorText}>{error}</span>
+      <InputError error={error} />
     </div>
   );
 });

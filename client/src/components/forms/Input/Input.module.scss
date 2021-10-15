@@ -11,6 +11,10 @@
         & > .inputContainer {
             border-color: $color-danger;
         }
+
+        & > .inputContainerFocus {
+            background-color: $color-danger-opacity-background;
+        }
         color: $color-danger;
     }
 }
@@ -28,7 +32,7 @@
     margin-bottom: 0.5rem;
     display: flex;
     transition: all 0.2s ease-in-out;
-    transition: border 100ms ease-out;
+    transition: background-color 200ms ease-out;
     background-color: #fff;
 
     @media (hover: hover) {
@@ -45,12 +49,12 @@
 .inputContainerFocus {
     border-color: $color-main;
     color: $color-main;
-    border-width: 3.5px;
+    background-color: $color-main-opacity-background;
 }
 
 .input {
     border: none;
-    color: $color-secondary;
+    background-color: transparent;
     flex: 1;
     padding: 0 0.5rem;
 
@@ -68,8 +72,5 @@
 .label {
     margin-bottom: 0.5rem;
     font-size: 1.4rem;
-}
-
-.errorText {
-    font-size: 1.3rem;
+    transition: font-weight 200ms ease-in-out;
 }
