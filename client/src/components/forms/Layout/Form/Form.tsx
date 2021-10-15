@@ -3,9 +3,10 @@ import styles from "./Form.module.scss";
 
 export default function Form({
   children,
+  onSubmit,
 }: FormHTMLAttributes<HTMLFormElement>): JSX.Element {
   return (
-    <form className={styles.form}>
+    <form onSubmit={onSubmit} className={styles.form}>
       {children}
     </form>
   );

@@ -104,6 +104,7 @@ function Select({
     transition: `opacity ${200}ms ease-in-out`,
     opacity: 0,
   };
+
   const transitionStyles: { [key in TransitionStatus]?: { opacity: number } } = {
     entering: { opacity: 1 },
     entered: { opacity: 1 },
