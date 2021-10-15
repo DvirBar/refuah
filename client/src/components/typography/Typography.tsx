@@ -17,6 +17,10 @@ export default function Typography({
   switch (variant) {
     case "h1":
       return <h1 className={composeClassNames(className || "", styles.h1)}>{children}</h1>;
+    case "h2":
+      return <h2 className={composeClassNames(className || "", styles.h2)}>{children}</h2>;
+    case "content":
+      return <div className={composeClassNames(className || "", styles.content)}>{children}</div>;
     default:
       return null;
   }

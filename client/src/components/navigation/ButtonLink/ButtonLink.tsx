@@ -12,6 +12,7 @@ export default function ButtonLink(props: ButtonHTMLAttributes<HTMLButtonElement
   return (
     <button
       {...props}
+      type="button"
       className={composeClassNames(styles.link, styles.buttonLink, className || "")}
     >
       {children}

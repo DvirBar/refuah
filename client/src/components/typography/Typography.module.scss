@@ -1,6 +1,19 @@
+@import "src/styles/vars.scss";
+
 .h1 {
-    font-size: 5rem;
+    font-size: 3.2rem;
     font-weight: 800;
-    color: #585858;
+    color: $color-header;
     margin-bottom: 3rem;
+}
+
+.h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: $color-header;
+    margin-bottom: 1.5rem;
+}
+
+.content {
+    font-weight: 300;
 }
