@@ -34,6 +34,7 @@
         "react/jsx-filename-extension": [ "warn", {"extensions": [".tsx"]} ], 
         "import/extensions": "off",
         "no-shadow": "off",
+        "no-console": ["warn", {"allow": ["warn", "error"]}],
         "@typescript-eslint/no-shadow": ["error"],
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",

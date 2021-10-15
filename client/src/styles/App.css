@@ -41,13 +41,20 @@ html {
 
 body {
     scroll-behavior: smooth;
-    overflow-y: hidden;
 }
 
 body,
 input,
 button {
     font-size: 1.6rem;
+}
+
+.root {
+    height: 100vh;
+}
+
+.App {
+    height: 100%;
 }
 
 input {
