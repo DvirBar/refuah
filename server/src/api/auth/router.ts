@@ -1,4 +1,5 @@
-import express from "express";
+import express, { Request, Response } from "express";
+import { sendEmail } from "../../services/email/service";
 import auth from "../../middleware/auth";
 import authAdmin from "../../middleware/authAdmin";
 import * as UserController from "./controllers";
@@ -29,6 +30,16 @@ router.post("/refreshToken", UserController.refreshOldToken);
 // @desc    Log user out
 // @access  Private
 router.post("/logout", UserController.logout);
+
+// @route   POST api/auth/logout
+// @desc    Log user out
+// @access  Private
+router.post("/forgotPassword", UserController.sendResetPasswordEmail);
+
+// @route   POST api/auth/logout
+// @desc    Log user out
+// @access  Private
+router.post("/resetPassword", UserController.resetPassword);
 
 // @route   PUT api/auth/user/:id
 // @desc    Update user details

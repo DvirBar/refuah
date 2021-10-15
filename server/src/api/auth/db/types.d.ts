@@ -12,7 +12,7 @@ export interface UserSecureDetails {
 
 export interface IUser extends UserSecureDetails {
     password: string;
-    formerPasswords?: string;
+    formerPasswords?: string[];
     failedAttempts?: number;
     blocked?: {
         isBlocked: boolean;
@@ -30,5 +30,6 @@ export interface UserModel extends Model<IUser> {
     blockUser: (user: UserDoc, expiry?: Date) => Promise<UserDoc>;
     addFailedAttempt: (user: UserDoc) => Promise<number>;
     resetFailedAttempts: (user: UserDoc) => Promise<UserDoc>;
+    resetPassword: (this: Model<IUser>, user: UserDoc, newPassword: string) => Promise<void>
     removeUser: (this: Model<IUser>, userId: string) => Promise<void>;
 }
