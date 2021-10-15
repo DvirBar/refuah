@@ -2,48 +2,76 @@ import React from "react";
 import Button from "components/forms/Button/Button";
 import Input from "components/forms/Input/Input";
 import Form from "components/forms/Layout/Form/Form";
+import useForm from "forms/useForm";
+import { RegisterData } from "store/auth/types";
+import useAuthActions from "store/auth/actions";
 import styles from "./RegisterForm.module.scss";
 
 export default function RegisterForm(): JSX.Element {
+  const {
+    values,
+    errors,
+    formTriggers,
+    handleSubmit,
+  } = useForm<RegisterData>({
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    password: "",
+  }, { dynamicValidation: true });
+
+  const {
+    register,
+  } = useAuthActions();
+
+  const onSubmit = () => {
+    register(values);
+  };
+
   return (
-    <Form>
+    <Form onSubmit={e => handleSubmit(e, onSubmit)}>
       <div className={styles.nameBlock}>
         <Input
           name="firstName"
-          value="דביר"
+          value={values.firstName}
+          error={errors.firstName}
           label="שם"
-          onChange={() => console.log("change")}
+          {...formTriggers}
         />
         <Input
           name="lastName"
-          value="ברטוב"
+          value={values.lastName}
+          error={errors.lastName}
           label="שם משפחה"
-          onChange={() => console.log("change")}
+          {...formTriggers}
         />
       </div>
       <Input
         name="username"
-        value="dvirbar"
+        value={values.username}
+        error={errors.username}
         label="שם משתמש"
-        onChange={() => console.log("change")}
+        {...formTriggers}
       />
       <Input
         name="email"
-        value="dvir.bartov1@gmail.com"
+        value={values.email}
+        error={errors.email}
         label="אימייל"
-        onChange={() => console.log("change")}
+        {...formTriggers}
       />
       <Input
         type="password"
         name="password"
-        value="123456"
+        value={values.password}
+        error={errors.password}
         label="סיסמה"
-        onChange={() => console.log("change")}
+        {...formTriggers}
       />
       <Button
         className={styles.button}
         type="submit"
-        onClick={() => console.log("hi")}
       >
         הרשמה
       </Button>

@@ -11,6 +11,10 @@ interface IProps {
 export default function Register({ toggleLogin }: IProps): JSX.Element {
   return (
     <div className={styles.register}>
+      <Typography className={styles.header} variant="h1">
+        הרשמה
+      </Typography>
+      <RegisterForm />
       <div className={styles.navAuth}>
         <NavigateAuth
           toggleLogin={toggleLogin}
@@ -18,10 +22,6 @@ export default function Register({ toggleLogin }: IProps): JSX.Element {
           text="להתחברות"
         />
       </div>
-      <Typography className={styles.header} variant="h1">
-        הרשמה
-      </Typography>
-      <RegisterForm />
     </div>
   );
 }

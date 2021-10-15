@@ -7,32 +7,39 @@ import styles from "./Auth.module.scss";
 export default function Auth(): JSX.Element {
   const [isLogin, setIsLogin] = useState(true);
   const duration = 200;
+  const opacityDur = 200;
   const toggleLogin = () => {
     setIsLogin(!isLogin);
   };
 
   const loginStyle = {
-    transition: `transform ${duration}ms ease-in-out`,
-    transform: "translateY(0)",
+    transition: `transform ${duration}ms ease-in-out, opacity ${opacityDur}ms ease-in-out`,
+    transform: "translateX(0)",
+    opacity: 1,
   };
 
   const registerStyle = {
-    transition: `transform ${duration}ms ease-in-out`,
-    transform: "translateY(0)",
+    transition: `transform ${duration}ms ease-in-out, opacity ${opacityDur}ms ease-in-out`,
+    transform: "translateX(0)",
+    opacity: 1,
   };
 
-  const loginTransitionStyles: { [key in TransitionStatus]?: { transform: string } } = {
-    entering: { transform: "translateY(-100vh)" },
-    entered: { transform: "translateY(0)" },
-    exiting: { transform: "translateY(-100vh)" },
-    exited: { transform: "translateY(-100vh)" },
+  const loginTransitionStyles: {
+    [key in TransitionStatus]?: { transform: string, opacity: number }
+  } = {
+    entering: { transform: "translateX(-100vw)", opacity: 1 },
+    entered: { transform: "translateX(0)", opacity: 1 },
+    exiting: { transform: "translateX(-100vw)", opacity: 0 },
+    exited: { transform: "translateX(-100vw)", opacity: 0 },
   };
 
-  const registerTransitionStyles: { [key in TransitionStatus]?: { transform: string } } = {
-    entering: { transform: "translateY(100vh)" },
-    entered: { transform: "translateY(0)" },
-    exiting: { transform: "translateY(100vh)" },
-    exited: { transform: "translateY(100vh)" },
+  const registerTransitionStyles: {
+    [key in TransitionStatus]?: { transform: string, opacity: number }
+  } = {
+    entering: { transform: "translateX(100vw)", opacity: 1 },
+    entered: { transform: "translateX(0)", opacity: 1 },
+    exiting: { transform: "translateX(100vw)", opacity: 0 },
+    exited: { transform: "translateX(100vw)", opacity: 0 },
   };
 
   return (

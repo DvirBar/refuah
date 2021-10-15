@@ -1,6 +1,6 @@
 import React from "react";
 import ButtonLink from "components/navigation/ButtonLink/ButtonLink";
-import { ChevronDown, ChevronUp } from "react-feather";
+import { ChevronRight, ChevronLeft } from "react-feather";
 import styles from "./NavigateAuth.module.scss";
 
 interface IProps {
@@ -11,18 +11,17 @@ interface IProps {
 
 export default function NavigateAuth({ text, isLogin, toggleLogin }: IProps): JSX.Element {
   const arrowsProps = {
-    size: 30,
+    size: 25,
     className: styles.arrow,
   };
 
   return (
     <ButtonLink onClick={toggleLogin}>
       <div className={styles.registerLink}>
-        {!isLogin
-          && <ChevronUp {...arrowsProps} />}
-        <div className={styles.text}>{text}</div>
         {isLogin
-          && <ChevronDown {...arrowsProps} />}
+          && <ChevronRight {...arrowsProps} />}
+        <div className={styles.text}>{text}</div>
+        {!isLogin && <ChevronLeft {...arrowsProps} />}
       </div>
     </ButtonLink>
   );
