@@ -7,7 +7,7 @@ import style from "./Button.module.scss";
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: Variants;
     children: React.ReactNode;
-    onClick: (event: React.MouseEvent) => void
+    onClick?: (event: React.MouseEvent) => void
 }
 
 export default function Button(props: ButtonProps): JSX.Element {
