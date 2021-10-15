@@ -3,18 +3,17 @@
 .logo {
     display: flex;
     align-items: center;
-    z-index: 100;
-    position: absolute;
-    background-color: #ebebeb;
-    padding: 2rem;
+    // background-color: #ebebeb;
+    padding: 1rem;
+    width: 100%;
 }
 
 .logoImage {
-    height: 65px;
+    height: 50px;
 }
 
 .logoText {
     color: $color-main;
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     margin-right: 1rem;
 }

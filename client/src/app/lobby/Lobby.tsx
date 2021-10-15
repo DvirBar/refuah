@@ -4,8 +4,7 @@ import styles from "./Lobby.module.scss";
 import Auth from "./auth/Auth";
 
 export default function Lobby(): JSX.Element {
-  const backgroundColor = "#ebebeb";
-
+  const backgroundColor = "#fff";
   return (
     <div className={styles.container}>
       <div className={styles.rightPanel} style={{ backgroundColor }}>
