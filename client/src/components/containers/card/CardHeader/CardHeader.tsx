@@ -1,3 +1,4 @@
+import Typography from "components/typography/Typography";
 import React from "react";
 import { X } from "react-feather";
 import styles from "./CardHeader.module.scss";
@@ -26,10 +27,16 @@ export default function CardHeader({
           </button>
         </div>
         )}
-      {title
-        && <div className={styles.title}>{title}</div>}
-      {subTitle
-        && <div className={styles.subtitle}>{subTitle}</div>}
+      {(title || subTitle)
+        && (
+          <div className={styles.titles}>
+            {title
+          && <Typography variant="h1">{title}</Typography>}
+            {subTitle
+          && <Typography variant="subtitle">{subTitle}</Typography>}
+          </div>
+        )}
+
     </div>
   );
 }

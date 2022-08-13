@@ -1,20 +1,10 @@
-.container {
-    background-color: #fff;
-}
-
 .showcase {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-direction: row;
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 2rem 0;
+    padding: 2rem;
+    width: 37rem;
 }
 
 .showcaseItem {
-    width: 40rem;
+    width: 50rem;
 
     @media only screen and(max-width: 450px) {
         width: 95%;

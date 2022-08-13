@@ -1,0 +1,1 @@
+.container{position:absolute;height:100vh;width:100vw;top:0;left:0;z-index:1;display:flex;justify-content:center;align-items:center;background-color:rgba(0,0,0,0.3)}.layout-enter{opacity:0}.layout-enter-active{opacity:1;transition:opacity 200ms ease-out}.layout-exit{opacity:1}.layout-exit-active{opacity:0;transition:opacity 10000ms ease-out}

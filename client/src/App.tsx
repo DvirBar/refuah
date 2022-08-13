@@ -1,13 +1,16 @@
 import React from "react";
-import Lobby from "app/lobby/Lobby";
 import { RecoilRoot } from "recoil";
 import "./styles/App.css";
+import { BrowserRouter } from "react-router-dom";
+import Router from "routing/Router";
 
 function App(): JSX.Element {
   return (
     <div className="App">
       <RecoilRoot>
-        <Lobby />
+        <BrowserRouter>
+          <Router />
+        </BrowserRouter>
       </RecoilRoot>
     </div>
   );

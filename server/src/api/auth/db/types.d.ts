@@ -1,12 +1,13 @@
 import { Document, Model, Schema } from "mongoose";
-import { UserEdit } from "./methods";
 
 export interface UserSecureDetails {
     firstName: string;
-    lastName: string
+    lastName: string;
+    username: string;
     email: string;
     isAdmin?: boolean;
-    isPremium?: boolean;
+    passwordLastChange?: Date;
+    passwordTimesChanged?: number;
     dateCreated?: Date;
 }
 
@@ -21,15 +22,20 @@ export interface IUser extends UserSecureDetails {
 }
 
 export type UserDoc = IUser & Document<IUser>
+export type UserEdit = Pick<IUser, "firstName" | "lastName" | "email">
 
-export interface UserModel extends Model<IUser> {
-    getUserByEmail: (this: Model<IUser>, email: string) => Promise<UserDoc | null>;
-    createUser: (this: Model<IUser>, userDetails: IUser) => Promise<UserDoc>;
-    editUser: (this: Model<IUser>, userId: string, userDetails: UserEdit) => Promise<UserDoc>;
-    isUserBlocked: (user: UserDoc) => Promise<boolean>;
-    blockUser: (user: UserDoc, expiry?: Date) => Promise<UserDoc>;
-    addFailedAttempt: (user: UserDoc) => Promise<number>;
-    resetFailedAttempts: (user: UserDoc) => Promise<UserDoc>;
-    resetPassword: (this: Model<IUser>, user: UserDoc, newPassword: string) => Promise<void>
-    removeUser: (this: Model<IUser>, userId: string) => Promise<void>;
+export interface IUserMethods extends UserDoc {
+    edit(userDetails: UserEdit): Promise<UserDoc>,
+    isBlocked(): Promise<boolean>,
+    changePassword(newPassword: string): Promise<void>,
+    removeUser(): Promise<void>,
+    block(expiry?: Date): Promise<UserDoc>,
+    addFailedAttempt(): Promise<number>,
+    resetFailedAttempts(): Promise<UserDoc>
+}
+
+export interface UserModel extends Model<IUserMethods> {
+    findUserByIdOrFail(userId: string): Promise<UserDoc>,
+    getUserByEmail(email: string,): Promise<UserDoc | null>,
+    createUser(userDetails: IUser): Promise<UserDoc>
 }

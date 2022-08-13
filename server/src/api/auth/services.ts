@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { SendMailOptions } from "nodemailer";
 import { sendEmail } from "../../services/email/service";
-import User from "./db/model";
+import User from "./db";
 import {
 	UserAlreadyExists,
 	InvalidCredentials,
@@ -18,14 +18,14 @@ import {
 	hashPassword,
 	userWithoutPassword,
 	verifyAccessToken,
+	verifyPasswordToken,
 	verifyRefreshToken,
 } from "./utils";
-import { findUserByIdOrFail } from "./db/methods";
+import { changePassword, findUserByIdOrFail } from "./db/methods";
 
 export async function getUserByToken(token: string): Promise<UserDoc> {
 	const decoded = verifyAccessToken(token) as Payload;
 	const user = await findUserByIdOrFail(User, decoded.id);
-
 	return user;
 }
 
@@ -55,7 +55,6 @@ export async function register(userDetails: IUser): Promise<UserAccess> {
 
 export async function login(email: string, loginPassword: string): Promise<UserAccess> {
 	const user = await User.getUserByEmail(email);
-
 	// Validating creadentials and checking that user is not blocked
 	if (!user) {
 		throw InvalidCredentials;
@@ -100,8 +99,9 @@ export async function refreshOldToken(refreshToken: string): Promise<string> {
 	return createAccessToken({ id: user.id });
 }
 
-export async function changePassword(user: UserDoc, newPassword: string) {
-	const matchCurrentPassword = await bcrypt.compare(user.password, newPassword);
+export async function validateAndChangePassword(user: UserDoc, newPassword: string) {
+	const matchCurrentPassword = await bcrypt.compare(newPassword, user.password);
+
 	if (matchCurrentPassword) {
 		throw PasswordAlreadyUsed;
 	}
@@ -109,7 +109,7 @@ export async function changePassword(user: UserDoc, newPassword: string) {
 	if (user.formerPasswords) {
 		for (const password of user.formerPasswords) {
 			// eslint-disable-next-line no-await-in-loop
-			const match = await bcrypt.compare(password, newPassword);
+			const match = await bcrypt.compare(newPassword, password);
 
 			if (match) {
 				throw PasswordAlreadyUsed;
@@ -117,11 +117,7 @@ export async function changePassword(user: UserDoc, newPassword: string) {
 		}
 	}
 
-	const hashedPasssword = await hashPassword(newPassword);
-
-	user.password = hashedPasssword;
-
-	await user.save();
+	changePassword(user, newPassword);
 }
 
 export function isUserBlocked(user: UserDoc): Promise<boolean> {
@@ -140,7 +136,7 @@ export async function sendResetPasswordEmail(email: string) {
 	if (!user) {
 		throw NoMatchingUserForEmail;
 	}
-
+	const user1 = new User();
 	const payload: Payload = { id: user.id };
 	const token = createPasswordResetToken(payload);
 	const emailOptions: SendMailOptions = {
@@ -165,9 +161,10 @@ export async function sendResetPasswordEmail(email: string) {
 }
 
 export async function resetPassword(token: string, newPassword: string) {
-	const user = await getUserByToken(token);
+	const decoded = verifyPasswordToken(token) as Payload;
+	const user = await findUserByIdOrFail(User, decoded.id);
 
-	await changePassword(user, newPassword);
+	await validateAndChangePassword(user, newPassword);
 }
 
 export async function removeUser(delUserId: string): Promise<void> {

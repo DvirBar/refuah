@@ -23,7 +23,7 @@ export default function LoginForm(): JSX.Element {
     email: "",
     password: "",
   }, {
-    dynamicValidation: true,
+    dynamicValidation: false,
   });
 
   const {
@@ -59,7 +59,6 @@ export default function LoginForm(): JSX.Element {
           className={styles.forgotPassword}
         >
           שכחתי את הסיסמה
-
         </ButtonLink>
         <ForgotPassword
           display={displatForgot}

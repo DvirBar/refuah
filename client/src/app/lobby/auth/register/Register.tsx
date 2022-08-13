@@ -1,6 +1,6 @@
 import Typography from "components/typography/Typography";
 import React from "react";
-import NavigateAuth from "../NavigateAuth/NavigateAuth";
+import ButtonLink from "components/navigation/ButtonLink/ButtonLink";
 import RegisterForm from "./RegisterForm";
 import styles from "./Register.module.scss";
 
@@ -15,13 +15,9 @@ export default function Register({ toggleLogin }: IProps): JSX.Element {
         הרשמה
       </Typography>
       <RegisterForm />
-      <div className={styles.navAuth}>
-        <NavigateAuth
-          toggleLogin={toggleLogin}
-          isLogin={false}
-          text="להתחברות"
-        />
-      </div>
+      <ButtonLink onClick={() => toggleLogin()}>
+        להתחברות
+      </ButtonLink>
     </div>
   );
 }

@@ -16,6 +16,19 @@
     align-items: center;
 }
 
+.buttonContent {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.buttonLogo {
+    align-self: flex-start;
+}
+
+
+
 .noUserText {
     margin-bottom: 0.5rem;
 }

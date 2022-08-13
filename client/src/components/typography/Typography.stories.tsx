@@ -14,3 +14,9 @@ TypographyMain.args = {
   children: "כותרת",
   variant: "h1",
 };
+
+export const TypographySub = Template.bind({});
+TypographySub.args = {
+  children: "כותרת",
+  variant: "subtitle",
+};

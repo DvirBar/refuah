@@ -1,13 +1,9 @@
-.passwordBlock {
-    display: flex;
-    flex-direction: column;
-}
-
 .forgotPassword {
-    align-self: flex-end;
+    align-self: flex-start;
+    margin-top: 1rem;
 }
 
 .button {
-    margin-top: 3rem;
+    margin-top: 1rem;
     align-self: center;
 }

@@ -1,6 +1,6 @@
 import ModalLayout from "components/layout/ModalLayout/ModalLayout";
-import React, { useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
+import Portal from "components/utils/Portal";
+import React from "react";
 import { CardProps } from "../card/Card";
 import { CardBodyProps } from "../card/CardBody/CardBody";
 import { CardHeaderProps } from "../card/CardHeader/CardHeader";
@@ -22,27 +22,12 @@ export default function Modal({
   subTitle,
   children,
 }: ModalProps): JSX.Element {
-  const rootElemRef = useRef<HTMLDivElement>(document.createElement("div"));
-
-  useEffect(() => {
-    const parentElement = document.getElementById("presentation");
-    const currentRootElem = rootElemRef.current;
-    parentElement?.appendChild(currentRootElem);
-
-    return function removeElement() {
-      currentRootElem.remove();
-    };
-  }, [rootElemRef]);
-
-  return ReactDOM.createPortal(
-    <>
+  return (
+    <Portal>
       <ModalLayout
         display={display}
         setDisplay={setDisplay}
       />
-      <div>
-        testing ferew
-      </div>
       <ModalContainer
         display={display}
         setDisplay={setDisplay}
@@ -51,7 +36,7 @@ export default function Modal({
       >
         {children}
       </ModalContainer>
-    </>,
-    rootElemRef.current,
+    </Portal>
+
   );
 }

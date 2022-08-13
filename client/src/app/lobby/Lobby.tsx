@@ -1,17 +1,18 @@
 import React from "react";
+import Card from "components/containers/card/Card";
 import LogoMain from "./LogoMain/LogoMain";
 import styles from "./Lobby.module.scss";
 import Auth from "./auth/Auth";
 
 export default function Lobby(): JSX.Element {
-  const backgroundColor = "#fff";
+  const backgroundColor = "#486974";
   return (
     <div className={styles.container}>
-      <div className={styles.rightPanel} style={{ backgroundColor }}>
-        <LogoMain backgroundColor={backgroundColor} />
+      <LogoMain backgroundColor={backgroundColor} />
+      <Card className={styles.authCard}>
         <Auth />
-      </div>
-      <div className={styles.leftPanel}>פאנל שמאלי</div>
+      </Card>
+
     </div>
   );
 }

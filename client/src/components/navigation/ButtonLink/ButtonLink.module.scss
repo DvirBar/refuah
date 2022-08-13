@@ -5,33 +5,43 @@ button {
     border: none;
 }
 
-.buttonLink {
-    background-image: linear-gradient(
-        rgba($color-main-opacity-background, 0),
-        rgba($color-main-opacity-background, 0)
-    );
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: 75% 50%;
-    transition: background 150ms ease-out;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-
-    &:hover {
-        background-size: 100% 100%;
-        background-image: linear-gradient(
-            $color-main-opacity-background,
-            $color-main-opacity-background
-        );
-    }
-
-    &:active {
-        opacity: 0.8;
-    }
-}
-
 .link {
     color: $color-main;
     cursor: pointer;
     text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
+
+// .buttonLink {
+//     background-image: linear-gradient(
+//         rgba($color-main-opacity-background, 0),
+//         rgba($color-main-opacity-background, 0)
+//     );
+//     background-position: 50% 50%;
+//     background-repeat: no-repeat;
+//     background-size: 75% 50%;
+//     transition: background 150ms ease-out;
+//     padding: 0.4rem 0.8rem;
+//     border-radius: 4px;
+
+//     &:hover {
+//         background-size: 100% 100%;
+//         background-image: linear-gradient(
+//             $color-main-opacity-background,
+//             $color-main-opacity-background
+//         );
+//     }
+
+//     &:active {
+//         opacity: 0.8;
+//     }
+// }
+
+// .link {
+//     color: $color-main;
+//     cursor: pointer;
+//     text-decoration: none;
+// }

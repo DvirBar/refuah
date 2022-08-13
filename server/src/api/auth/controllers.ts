@@ -13,7 +13,7 @@ import {
 	SuccessDelete,
 	PasswordResetEmailSentSuccessfully,
 	PasswordResetEmailNotSent,
-	EmailIsRequiredForPasswordReset
+	EmailIsRequiredForPasswordReset,
 } from "./messages.json";
 
 export function getUserByToken(_req: Request, res: Response): Response {
@@ -129,12 +129,13 @@ export async function resetPassword(
 	next: NextFunction,
 ): Promise<Response | void> {
 	const { token } = req.params;
-	const { newPassword } = req.body;
+
+	const { password } = req.body;
 	if (!token) {
 		return res.status(400).send("No token provided");
 	}
 	try {
-		await UserService.resetPassword(token, newPassword);
+		await UserService.resetPassword(token, password);
 		return res.send("Password reset successfully");
 	} catch (err) {
 		return next(err);

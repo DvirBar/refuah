@@ -12,6 +12,6 @@ const Template: ComponentStory<typeof CardHeader> = (args) => <CardHeader {...ar
 export const Main = Template.bind({});
 Main.args = {
   title: "כותרת",
-  subTitle: "תת כותרת",
+  subTitle: "תת כותרת קצת ארוכה כדי להדגים זאת",
   closeAction: () => console.log("exec"),
 };

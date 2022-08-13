@@ -19,6 +19,8 @@ export default function Typography({
       return <h1 className={composeClassNames(className || "", styles.h1)}>{children}</h1>;
     case "h2":
       return <h2 className={composeClassNames(className || "", styles.h2)}>{children}</h2>;
+    case "subtitle":
+      return <div className={composeClassNames(className || "", styles.subtitle)}>{children}</div>;
     case "content":
       return <div className={composeClassNames(className || "", styles.content)}>{children}</div>;
     default:

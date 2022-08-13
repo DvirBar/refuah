@@ -22,7 +22,7 @@ class Fetcher {
 
       this.baseUrl = process.env.NODE_ENV === "production"
         ? "https://refuah.org.il/api"
-        : "http://10.0.0.18:3000/api";
+        : "http://172.20.10.2:3000/api";
     }
 
     private composeUrl(endpoint: string) {

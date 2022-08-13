@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { StatusType } from "store/types";
 import { AuthAtom } from "./types";
 
 export const authAtom = atom<AuthAtom>({
@@ -7,4 +8,9 @@ export const authAtom = atom<AuthAtom>({
     isAuthenticated: false,
     user: null,
   },
+});
+
+export const resetPasswordAtom = atom<StatusType | undefined>({
+  key: "resetPasswordAtom",
+  default: undefined,
 });

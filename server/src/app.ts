@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import path from "path";
 import morgan from "morgan";
 import errorHandler from "./middleware/errorHandler";
-import initRoutes from "./router";
+import initRoutes from "./routes";
 import initMongoose from "./db/init";
 
 const app = express();

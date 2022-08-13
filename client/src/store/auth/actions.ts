@@ -51,10 +51,19 @@ function useAuthActions(): AuthActionsHookReturn {
     }
   }
 
+  async function resetPassword(password: string, token: string) {
+    try {
+      await request.post<string>(`${baseUrl}/resetPassword/${token}`, { password });
+    } catch (err) {
+      authError(err);
+    }
+  }
+
   return {
     login,
     register,
     forgotPassword,
+    resetPassword,
   };
 }
 

@@ -39,7 +39,7 @@ router.post("/forgotPassword", UserController.sendResetPasswordEmail);
 // @route   POST api/auth/logout
 // @desc    Log user out
 // @access  Private
-router.post("/resetPassword", UserController.resetPassword);
+router.post("/resetPassword/:token", UserController.resetPassword);
 
 // @route   PUT api/auth/user/:id
 // @desc    Update user details

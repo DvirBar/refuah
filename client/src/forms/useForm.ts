@@ -31,28 +31,30 @@ function useForm<ValuesType extends Record<keyof ValuesType, ValidFieldValues>>(
   };
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    if (options?.dynamicValidation) {
-      const value = values[e.target.name as keyof ValuesType];
-      const currentError = validateForm({ [e.target.name]: value });
-
-      setErrors(prevErrors => {
-        let newErrorsState = {
-          ...prevErrors,
-          ...currentError,
-        };
-        if (Object.keys(currentError).length === 0) {
-          const newErrors: ValidationError = {};
-          Object.keys(prevErrors).forEach(fieldName => {
-            if (fieldName !== e.target.name) {
-              newErrors[fieldName] = prevErrors[fieldName];
-            }
-          });
-          newErrorsState = newErrors;
-        }
-
-        return newErrorsState;
-      });
+    if (!options?.dynamicValidation) {
+      return;
     }
+
+    const value = values[e.target.name as keyof ValuesType];
+    const currentError = validateForm({ [e.target.name]: value });
+
+    setErrors(prevErrors => {
+      let newErrorsState = {
+        ...prevErrors,
+        ...currentError,
+      };
+      if (Object.keys(currentError).length === 0) {
+        const newErrors: ValidationError = {};
+        Object.keys(prevErrors).forEach(fieldName => {
+          if (fieldName !== e.target.name) {
+            newErrors[fieldName] = prevErrors[fieldName];
+          }
+        });
+        newErrorsState = newErrors;
+      }
+
+      return newErrorsState;
+    });
   };
 
   const handleSubmit = (

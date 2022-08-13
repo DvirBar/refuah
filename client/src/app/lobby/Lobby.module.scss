@@ -5,23 +5,13 @@
     height: 100vh;
     width: 100vw;
     position: fixed;
-}
-
-.rightPanel {
-    height: 100%;
-    width: 60%;
-    display: flex;
     flex-direction: column;
-    position: relative;
+    align-items: center;
+    background-color: $color-main;
 }
 
-.leftPanel {
-    background-color: $color-main;
-    z-index: 1;
-    height: 100%;
-    color: #fff;
-    width: 40%;
-    position: fixed;
-    top: 0;
-    left: 0;
+.authCard {
+    width: 60rem;
+    display: flex;
+    justify-content: center;
 }

@@ -1,8 +1,10 @@
 import React from "react";
 import Typography from "components/typography/Typography";
+import Button from "components/forms/Button/Button";
+import googleLogo from "assets/googleLogo.svg";
+import ButtonLink from "components/navigation/ButtonLink/ButtonLink";
 import LoginForm from "./LoginForm";
 import styles from "./Login.module.scss";
-import NavigateAuth from "../NavigateAuth/NavigateAuth";
 
 interface IProps {
   toggleLogin: () => void
@@ -15,13 +17,19 @@ export default function Login({ toggleLogin }: IProps): JSX.Element {
         התחברות
       </Typography>
       <LoginForm />
+      <Button
+        variant="secondary"
+      >
+        <div className={styles.buttonContent}>
+          <img src={googleLogo} className={styles.buttonLogo} alt="googleLogo" />
+          <span>התחברות עם גוגל</span>
+        </div>
+      </Button>
       <div className={styles.navAuth}>
         <div className={styles.noUserText}>עדיין אין משתמש?</div>
-        <NavigateAuth
-          toggleLogin={toggleLogin}
-          text="להרשמה"
-          isLogin
-        />
+        <ButtonLink onClick={() => toggleLogin()}>
+          להרשמה
+        </ButtonLink>
       </div>
     </div>
   );

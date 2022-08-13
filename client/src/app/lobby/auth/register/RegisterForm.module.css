@@ -1,0 +1,1 @@
+.nameBlock{display:flex;justify-content:space-between}.nameBlock>*{flex:1}.nameBlock>*:first-child{margin-left:1.5rem}.nameBlock>*:last-child{margin-right:1.5rem}.button{margin-top:1.5rem;align-self:center}

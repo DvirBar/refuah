@@ -1,125 +1,108 @@
-import { Error, Model } from "mongoose";
+import { Error, model } from "mongoose";
 import { dateInPast } from "../../../utils/dates/dates";
-import { hashPassword } from "../utils";
-import { IUser, UserDoc } from "./types";
+import {
+	IUser,
+	UserDoc,
+	UserEdit,
+	UserModel,
+} from "./types";
 import { validateEmail } from "./validation";
+import { hashPassword } from "../utils";
+import UserSchema, { USER_MODEL } from "./model";
 
-export async function findUserByIdOrFail(
-	userModel: Model<IUser>,
-	userId: string,
-): Promise<UserDoc> {
-	const user = await userModel.findById(userId);
+const User = model<IUser, UserModel>(USER_MODEL);
 
-	if (!user) {
-		throw new Error(`Couldn't find user with id ${userId}`);
-	}
+UserSchema.statics = {
+	async findUserByIdOrFail(
+		userId: string,
+	): Promise<UserDoc> {
+		const user = await User.findById(userId);
 
-	return user;
-}
-
-export function getUserByEmail(
-	this: Model<IUser>,
-	email: string,
-): Promise<UserDoc | null> {
-	if (!validateEmail(email)) {
-		throw new Error("Tried to get user with invalid email address");
-	}
-
-	return this.findOne({ email }).exec();
-}
-
-export async function createUser(
-	this: Model<IUser>,
-	userDetails: IUser,
-): Promise<UserDoc> {
-	const hashedPassword = await hashPassword(userDetails.password);
-	const newUser = new this({
-		...userDetails,
-		password: hashedPassword,
-	});
-
-	return newUser.save();
-}
-
-export type UserEdit = Pick<IUser, "firstName" | "lastName" | "email">
-
-export async function editUser(
-	this: Model<IUser>,
-	userId: string,
-	userDetails: UserEdit,
-): Promise<UserDoc> {
-	const user = await findUserByIdOrFail(this, userId);
-
-	user.firstName = userDetails.firstName;
-	user.lastName = userDetails.lastName;
-	user.email = userDetails.email;
-
-	return user.save();
-}
-
-export async function isUserBlocked(user: UserDoc): Promise<boolean> {
-	if (user?.blocked?.isBlocked) {
-		const { expiry } = user.blocked;
-
-		// If no expiry and user is blocked
-		if (!expiry) {
-			return true;
+		if (!user) {
+			throw new Error(`Couldn't find user with id ${userId}`);
 		}
 
-		// If expiry date had not passed
-		if (!dateInPast(expiry)) {
-			return true;
+		return user;
+	},
+	getUserByEmail(
+		email: string,
+	): Promise<UserDoc | null> {
+		if (!validateEmail(email)) {
+			// TODO: Put this error in const
+			throw new Error("Tried to get user with invalid email address");
+		}
+		return User.findOne({ email }).exec();
+	},
+	async createUser(
+		userDetails: IUser,
+	): Promise<UserDoc> {
+		const hashedPassword = await hashPassword(userDetails.password);
+
+		const newUser = new User({
+			...userDetails,
+			password: hashedPassword,
+		});
+
+		return newUser.save();
+	},
+};
+
+UserSchema.methods = {
+	edit(userDetails: UserEdit) {
+		this.firstName = userDetails.firstName;
+		this.lastName = userDetails.lastName;
+		this.email = userDetails.email;
+		this.save();
+	},
+	async isBlocked(): Promise<boolean> {
+		if (this.blocked?.isBlocked) {
+			const { expiry } = this.blocked;
+
+			if (!expiry || !dateInPast(expiry)) {
+				return true;
+			}
+
+			this.blocked = undefined;
+			await this.save();
+			return false;
 		}
 
-		// If expiry date had passed, unblock user
-		user.blocked = undefined;
-		await user.save();
 		return false;
-	}
+	},
+	changePassword(newPassword: string) {
+		const hashedPasssword = await hashPassword(newPassword);
+		this.password = hashedPasssword;
+		this.formerPasswords?.push(this.password);
 
-	return false;
-}
+		this.save();
+	},
+	async removeUser(): Promise<void> {
+		// TODO: delete all associated stuff
+		this.remove();
+	},
+	block(expiry?: Date) {
+		this.blocked = {
+			isBlocked: true,
+		};
 
-export async function changePassword(
-	this: Model<IUser>,
-	user: UserDoc,
-	newPassword: string,
-): Promise<void> {
-	const hashedPasssword = await hashPassword(newPassword);
+		if (expiry) {
+			this.blocked.expiry = expiry;
+		}
 
-	user.password = hashedPasssword;
+		this.save();
+	},
+	async addFailedAttempt(): Promise<number> {
+		if (this.failedAttempts) {
+			this.failedAttempts += 1;
+			await this.save();
+		}
 
-	await user.save();
-}
+		return this.failedAttempts || 0;
+	},
+	resetFailedAttempts() {
+		this.failedAttempts = 0;
+		this.save();
+	},
+};
 
-export async function removeUser(this: Model<IUser>, userId: string): Promise<void> {
-	const user = await findUserByIdOrFail(this, userId);
-
-	await user.remove();
-}
-
-export function blockUser(user: UserDoc, expiry?: Date): Promise<UserDoc> {
-	user.blocked = {
-		isBlocked: true,
-	};
-
-	if (expiry) {
-		user.blocked.expiry = expiry;
-	}
-
-	return user.save();
-}
-
-export async function addFailedAttempt(user: UserDoc): Promise<number> {
-	if (user.failedAttempts) {
-		user.failedAttempts += 1;
-		await user.save();
-	}
-
-	return user.failedAttempts || 0;
-}
-
-export function resetFailedAttempts(user: UserDoc): Promise<UserDoc> {
-	user.failedAttempts = 0;
-	return user.save();
-}
+export default UserSchema;

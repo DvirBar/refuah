@@ -24,4 +24,5 @@ export interface AuthActionsHookReturn {
     login: (data: LoginData) => Promise<void>;
     register: (data: RegisterData) => Promise<void>;
     forgotPassword: (email: string) => Promise<void>;
+    resetPassword: (password: string, token: string) => Promise<void>;
 }

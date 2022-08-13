@@ -1,9 +1,10 @@
-import mongoose, { Schema } from "mongoose";
-import { IUser, UserModel } from "./types";
+import { Schema } from "mongoose";
+import { IUser, IUserMethods, UserModel } from "./types";
 import { validateEmail, validateName, validateUsername } from "./validation";
-import * as staticMethods from "./methods";
 
-export const UserSchema = new Schema<IUser>({
+export const USER_MODEL = "User";
+
+const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
 	firstName: {
 		type: String,
 		validate: {
@@ -48,6 +49,13 @@ export const UserSchema = new Schema<IUser>({
 	formerPasswords: [{
 		type: String,
 	}],
+	// passwordLastChanged: {
+	// 	type: Date,
+	// },
+	// passwordTimesChanged: {
+	// 	type: Number,
+	// 	default: 0,
+	// },
 	blocked: {
 		isBlocked: {
 			type: Boolean,
@@ -60,13 +68,10 @@ export const UserSchema = new Schema<IUser>({
 		type: Boolean,
 		default: false,
 	},
-	dataCreated: {
+	dateCreated: {
 		type: Date,
 		default: Date.now,
 	},
 });
 
-// Define static methods
-UserSchema.statics = staticMethods;
-
-export default mongoose.model<IUser, UserModel>("User", UserSchema);
+export default UserSchema;
