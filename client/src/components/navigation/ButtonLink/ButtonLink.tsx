@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React, { ButtonHTMLAttributes } from "react";
-import composeClassNames from "styles/composeClassNames";
-import styles from "./ButtonLink.module.scss";
+import styled from "styled-components";
+import { Theme } from "styles/types";
 
 export default function ButtonLink(props: ButtonHTMLAttributes<HTMLButtonElement>): JSX.Element {
   const {
@@ -10,13 +10,24 @@ export default function ButtonLink(props: ButtonHTMLAttributes<HTMLButtonElement
   } = props;
 
   return (
-    <button
+    <Wrapper
       {...props}
       type="button"
-      className={composeClassNames(styles.link, styles.buttonLink, className || "")}
+      className={className}
     >
       {children}
-
-    </button>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.button`
+  background-color: transparent;
+  border: none;
+  color: ${(props: Theme) => props.theme.colors.main};
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+      text-decoration: underline;
+  }
+`;

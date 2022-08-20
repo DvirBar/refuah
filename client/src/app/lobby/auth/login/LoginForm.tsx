@@ -5,7 +5,7 @@ import ButtonLink from "components/navigation/ButtonLink/ButtonLink";
 import Form from "components/forms/Layout/Form/Form";
 import useForm from "forms/useForm";
 import useAuthActions from "store/auth/actions";
-import styles from "./LoginForm.module.scss";
+import styled from "styled-components";
 import ForgotPassword from "../forgotPasword/ForgotPassword";
 
 export type LoginFields = {
@@ -45,7 +45,7 @@ export default function LoginForm(): JSX.Element {
         label="אימייל"
         {...formTriggers}
       />
-      <div className={styles.passwordBlock}>
+      <div>
         <Input
           type="password"
           name="password"
@@ -54,23 +54,31 @@ export default function LoginForm(): JSX.Element {
           label="סיסמה"
           {...formTriggers}
         />
-        <ButtonLink
+        <ForgotPasswordLinkStyled
           onClick={() => setDisplayForgot(true)}
-          className={styles.forgotPassword}
         >
           שכחתי את הסיסמה
-        </ButtonLink>
+        </ForgotPasswordLinkStyled>
         <ForgotPassword
           display={displatForgot}
           setDisplay={setDisplayForgot}
         />
       </div>
-      <Button
-        className={styles.button}
+      <SubmitButtonStyled
         type="submit"
       >
         התחברות
-      </Button>
+      </SubmitButtonStyled>
     </Form>
   );
 }
+
+const ForgotPasswordLinkStyled = styled(ButtonLink)`
+  align-self: flex-start;
+  margin-top: 1rem;
+`;
+
+const SubmitButtonStyled = styled(Button)`
+  margin-top: 1rem;
+  align-self: center;
+`;

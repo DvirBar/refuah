@@ -1,8 +1,7 @@
 /* eslint-disable no-undef */
 import React, { InputHTMLAttributes, useState } from "react";
-import composeClassNames from "styles/composeClassNames";
 import InputError from "../InputError/InputError";
-import styles from "./Input.module.scss";
+import InputStyle from "./InputStyle";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -36,39 +35,27 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref): JSX.E
   const isElementFocused = typeof isFocused === "boolean" ? isFocused : isInternalFocused;
 
   return (
-    <div
+    <InputStyle.Wrapper
       onClick={onClick}
       role="none"
       onFocus={() => setIsInternalFocused(true)}
       onBlur={() => setIsInternalFocused(false)}
-      className={composeClassNames(
-        styles.inputWrapper,
-        isElementFocused ? styles.focus : "",
-        error ? styles.error : "",
-        readOnly ? styles.readonly : "",
-      )}
+      $isElementFocused={isElementFocused}
+      $error={!!error}
+      $readOnly={!!readOnly}
     >
-      <span className={composeClassNames(
-        styles.label,
-        isElementFocused ? styles.labelFocused : "",
-      )}
-      >
+      <InputStyle.Label>
         {label}
-      </span>
-      <div className={composeClassNames(
-        styles.inputContainer,
-        isElementFocused ? styles.inputContainerFocus : "",
-      )}
-      >
+      </InputStyle.Label>
+      <InputStyle.Container>
         {startChip
           && (
-          <div className={styles.inputChip}>
+          <InputStyle.Chip>
             {startChip}
-          </div>
+          </InputStyle.Chip>
           )}
-        <input
+        <InputStyle.Input
           {...props}
-          className={styles.input}
           ref={ref}
           name={name}
           value={value}
@@ -76,13 +63,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref): JSX.E
         />
         {endChip
           && (
-          <div className={styles.inputChip}>
+          <InputStyle.Chip>
             {endChip}
-          </div>
+          </InputStyle.Chip>
           )}
-      </div>
+      </InputStyle.Container>
       <InputError error={error} />
-    </div>
+    </InputStyle.Wrapper>
   );
 });
 

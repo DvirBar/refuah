@@ -5,7 +5,7 @@ import Form from "components/forms/Layout/Form/Form";
 import useForm from "forms/useForm";
 import { RegisterData } from "store/auth/types";
 import useAuthActions from "store/auth/actions";
-import styles from "./RegisterForm.module.scss";
+import styled from "styled-components";
 
 export default function RegisterForm(): JSX.Element {
   const {
@@ -31,7 +31,7 @@ export default function RegisterForm(): JSX.Element {
 
   return (
     <Form onSubmit={e => handleSubmit(e, onSubmit)}>
-      <div className={styles.nameBlock}>
+      <DivNameBlock>
         <Input
           name="firstName"
           value={values.firstName}
@@ -46,7 +46,7 @@ export default function RegisterForm(): JSX.Element {
           label="שם משפחה"
           {...formTriggers}
         />
-      </div>
+      </DivNameBlock>
       <Input
         name="username"
         value={values.username}
@@ -69,12 +69,33 @@ export default function RegisterForm(): JSX.Element {
         label="סיסמה"
         {...formTriggers}
       />
-      <Button
-        className={styles.button}
+      <ButtonSubmit
         type="submit"
       >
         הרשמה
-      </Button>
+      </ButtonSubmit>
     </Form>
   );
 }
+
+const DivNameBlock = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  & > * {
+      flex: 1;
+
+      &:first-child {
+          margin-left: 1.5rem;
+      }
+
+      &:last-child {
+          margin-right: 1.5rem;
+      }
+  }
+`;
+
+const ButtonSubmit = styled(Button)`
+  margin-top: 1.5rem;   
+  align-self: center;
+`;

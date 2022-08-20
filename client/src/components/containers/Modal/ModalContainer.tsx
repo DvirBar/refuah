@@ -1,10 +1,10 @@
 import useOnClickOutside from "components/utils/layout/useOnClickOutside";
 import React, { useRef } from "react";
+import styled from "styled-components";
 import Card from "../card/Card";
 import CardBody from "../card/CardBody/CardBody";
 import CardHeader from "../card/CardHeader/CardHeader";
 import { ModalProps } from "./Modal";
-import styles from "./Modal.module.scss";
 
 export default function ModalContainer({
   display,
@@ -18,9 +18,8 @@ export default function ModalContainer({
   useOnClickOutside(ref, display, () => setDisplay(false));
   if (!display) return null;
   return (
-    <Card
+    <CardStyled
       ref={ref}
-      className={styles.card}
     >
       <CardHeader
         title={title}
@@ -30,6 +29,18 @@ export default function ModalContainer({
       <CardBody>
         {children}
       </CardBody>
-    </Card>
+    </CardStyled>
   );
 }
+
+const CardStyled = styled(Card)`
+  position: absolute;
+  width: 70rem;
+  z-index: 2;
+  right: 50%;
+  transform: translateX(50%);
+
+  @media only screen and(max-width: 500px) {
+      width: 100%;
+  }
+`;

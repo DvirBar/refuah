@@ -1,8 +1,7 @@
 /* eslint-disable no-undef */
 import { lazyVerticalScroll } from "components/utils/scrolls/scrolls";
 import React, { useRef } from "react";
-import composeClassNames from "styles/composeClassNames";
-import styles from "./Option.module.scss";
+import OptionStyle from "./OptionStyle";
 
 export interface OptionProps {
     value: string | number | undefined;
@@ -52,21 +51,18 @@ function Option({
   if (onClick) {
     return (
       <li>
-        <div
+        <OptionStyle.Wrapper
           ref={ref}
           role="option"
           aria-selected={isSelected ? "true" : "false"}
           onKeyPress={() => {}}
           onClick={() => onClick(value)}
           tabIndex={-1}
-          className={composeClassNames(
-            styles.option,
-            isSelected ? styles.optionSelected : "",
-            isFocused ? styles.optionSelected : "",
-          )}
+          $isSelected={isSelected}
+          $isFocused={!!isFocused}
         >
           {children}
-        </div>
+        </OptionStyle.Wrapper>
 
       </li>
     );

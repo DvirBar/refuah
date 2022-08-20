@@ -2,12 +2,10 @@
 import useKeyboardNavigation from "components/utils/controls/useKeyboardNavigation";
 import useOnClickOutside from "components/utils/layout/useOnClickOutside";
 import React, { useRef, useState } from "react";
-import { ChevronDown } from "react-feather";
-import composeClassNames from "styles/composeClassNames";
 import { Transition, TransitionStatus } from "react-transition-group";
 import Input from "../Input/Input";
 import { OptionProps } from "./Option";
-import styles from "./Select.module.scss";
+import SelectStyle from "./SelectStyle";
 
 interface SelectProps {
     children: React.ReactElement<OptionProps>[];
@@ -113,12 +111,11 @@ function Select({
   };
 
   return (
-    <div
+    <SelectStyle.Wrapper
       ref={parentRef}
       tabIndex={0}
       role="menu"
       onKeyDown={onKeyDown}
-      className={styles.select}
       onClick={handleParentClick}
       // onFocus={handleFocus}
       // onBlur={handleBlur}
@@ -133,15 +130,16 @@ function Select({
         onChange={e => onChange(e)}
         onClick={() => setIsOpen(!isOpen)}
         label={label}
-        endChip={<ChevronDown className={composeClassNames(styles.chevron, isOpen ? styles.flip : "")} />}
+        endChip={
+          <SelectStyle.Chip $isOpen={isOpen} />
+        }
       />
       <Transition unmountOnExit in={isOpen} timeout={200}>
         {state => (
-          <ul
+          <SelectStyle.OptionWrapper
             tabIndex={-1}
             ref={listRef}
             style={{ ...style, ...transitionStyles[state] }}
-            className={styles.optionsContainer}
           >
             {React.Children.map(children, (child, index) => React.cloneElement<OptionProps>(child, {
               onClick: handleClick,
@@ -152,11 +150,11 @@ function Select({
               parentScrollTop: listRef.current?.scrollTop,
               scrollParent,
             }))}
-          </ul>
+          </SelectStyle.OptionWrapper>
         )}
       </Transition>
 
-    </div>
+    </SelectStyle.Wrapper>
   );
 }
 

@@ -3,8 +3,8 @@ import Typography from "components/typography/Typography";
 import Button from "components/forms/Button/Button";
 import googleLogo from "assets/googleLogo.svg";
 import ButtonLink from "components/navigation/ButtonLink/ButtonLink";
+import styled from "styled-components";
 import LoginForm from "./LoginForm";
-import styles from "./Login.module.scss";
 
 interface IProps {
   toggleLogin: () => void
@@ -12,25 +12,56 @@ interface IProps {
 
 export default function Login({ toggleLogin }: IProps): JSX.Element {
   return (
-    <div className={styles.login}>
-      <Typography className={styles.header} variant="h1">
+    <Wrapper>
+      <HeaderStyled variant="h1">
         התחברות
-      </Typography>
+      </HeaderStyled>
       <LoginForm />
       <Button
         variant="secondary"
       >
-        <div className={styles.buttonContent}>
-          <img src={googleLogo} className={styles.buttonLogo} alt="googleLogo" />
+        <ButtonContent>
+          <ButtonLogo src={googleLogo} alt="googleLogo" />
           <span>התחברות עם גוגל</span>
-        </div>
+        </ButtonContent>
       </Button>
-      <div className={styles.navAuth}>
-        <div className={styles.noUserText}>עדיין אין משתמש?</div>
+      <NavAuth>
+        <NoUserText>עדיין אין משתמש?</NoUserText>
         <ButtonLink onClick={() => toggleLogin()}>
           להרשמה
         </ButtonLink>
-      </div>
-    </div>
+      </NavAuth>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const HeaderStyled = styled(Typography)`
+  align-self: center;
+`;
+
+const ButtonContent = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const ButtonLogo = styled.img`
+  align-self: flex-start;
+`;
+
+const NavAuth = styled.div`
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const NoUserText = styled.div`
+  margin-bottom: 0.5rem;
+`;

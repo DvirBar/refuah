@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import Login from "./login/Login";
-import styles from "./Auth.module.scss";
 import Register from "./register/Register";
 
 export default function Auth(): JSX.Element {
@@ -11,7 +11,7 @@ export default function Auth(): JSX.Element {
   };
 
   return (
-    <div className={styles.showcase}>
+    <Wrapper>
       {isLogin
         ? (
           <Login
@@ -19,7 +19,12 @@ export default function Auth(): JSX.Element {
           />
         )
         : <Register toggleLogin={toggleLogin} />}
-    </div>
+    </Wrapper>
 
   );
 }
+
+const Wrapper = styled.div`
+  padding: 2rem;
+  width: 37rem;
+`;

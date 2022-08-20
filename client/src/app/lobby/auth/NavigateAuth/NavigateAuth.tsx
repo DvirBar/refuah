@@ -1,7 +1,7 @@
 import React from "react";
 import ButtonLink from "components/navigation/ButtonLink/ButtonLink";
-// import { ChevronRight, ChevronLeft } from "react-feather";
-import styles from "./NavigateAuth.module.scss";
+import styled from "styled-components";
+import { Theme } from "styles/types";
 
 interface IProps {
   text: string,
@@ -11,9 +11,21 @@ interface IProps {
 export default function NavigateAuth({ text, toggleLogin }: IProps): JSX.Element {
   return (
     <ButtonLink onClick={toggleLogin}>
-      <div className={styles.registerLink}>
-        <div className={styles.text}>{text}</div>
-      </div>
+      <DivRegisterLink>
+        <DivText>{text}</DivText>
+      </DivRegisterLink>
     </ButtonLink>
   );
 }
+
+const DivRegisterLink = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${(props: Theme) => props.theme.colors.main};
+  cursor: pointer;
+`;
+
+const DivText = styled.div`
+  font-size: 1.8rem;
+`;

@@ -1,7 +1,7 @@
 import Modal from "components/containers/Modal/Modal";
 import React from "react";
+import styled from "styled-components";
 import ForgotPasswordForm from "./ForgotPasswordForm/ForgotPasswordForm";
-import styles from "./ForgotPassword.module.scss";
 
 export interface IProps {
     display: boolean,
@@ -18,9 +18,14 @@ export default function ForgotPassword({
       display={display}
       setDisplay={setDisplay}
     >
-      <div className={styles.container}>
+      <Wrapper>
         <ForgotPasswordForm />
-      </div>
+      </Wrapper>
     </Modal>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;

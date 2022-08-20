@@ -4,7 +4,7 @@ import Typography from "components/typography/Typography";
 import useForm from "forms/useForm";
 import React from "react";
 import useAuthActions from "store/auth/actions";
-import styles from "./ForgotPasswordForm.module.scss";
+import styled from "styled-components";
 
 export default function ForgotPasswordForm(): JSX.Element {
   const {
@@ -24,15 +24,15 @@ export default function ForgotPasswordForm(): JSX.Element {
   };
 
   return (
-    <form onSubmit={e => handleSubmit(e, onSubmit)} className={styles.container}>
-      <div className={styles.text}>
+    <Wrapper onSubmit={e => handleSubmit(e, onSubmit)}>
+      <TextStyle>
         <Typography variant="h2">
           לא נורא, גם זה קורה...
         </Typography>
         <Typography variant="content">
           רק הזינו את כתובת הדוא״ל שלכם, על מנת שנוכל לשלוח לכם קישור לאיפוס הסיסמה.
         </Typography>
-      </div>
+      </TextStyle>
 
       <Input
         value={values.email}
@@ -45,6 +45,23 @@ export default function ForgotPasswordForm(): JSX.Element {
       <Button type="submit">
         איפוס
       </Button>
-    </form>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 0;
+  height: 35rem;
+  width: 45rem;
+  justify-self: center;
+`;
+
+const TextStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

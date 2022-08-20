@@ -1,6 +1,5 @@
 import React, { CSSProperties, forwardRef } from "react";
-import composeClassNames from "styles/composeClassNames";
-import styles from "./Card.module.scss";
+import styled from "styled-components";
 
 export interface CardProps {
   children: React.ReactNode
@@ -11,17 +10,23 @@ export interface CardProps {
 const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
   const {
     children,
-    className,
   } = props;
 
   return (
-    <div
+    <Wrapper
       ref={ref}
-      className={composeClassNames(className ?? "", styles.card)}
     >
       {children}
-    </div>
+    </Wrapper>
   );
 });
+
+const Wrapper = styled.div`
+    border-radius: 15px;
+    padding-bottom: 1rem;
+    background-color: #fff;
+    display: block;
+    box-shadow: ${props => props.theme.shadows.main};
+`;
 
 export default Card;

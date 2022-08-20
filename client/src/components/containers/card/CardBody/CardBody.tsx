@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./CardBody.module.scss";
+import styled from "styled-components";
 
 export interface CardBodyProps {
     children: React.ReactNode
@@ -7,8 +7,14 @@ export interface CardBodyProps {
 
 export default function CardBody({ children }: CardBodyProps): JSX.Element {
   return (
-    <div className={styles.cardBody}>
+    <Body>
       {children}
-    </div>
+    </Body>
   );
 }
+
+const Body = styled.div`
+  padding: 2rem;
+  background-color: #fff;
+  flex: 1;
+`;

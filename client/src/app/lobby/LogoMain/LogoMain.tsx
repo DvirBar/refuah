@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "assets/logo.svg";
-import styles from "./LogoMain.module.scss";
+import styled from "styled-components";
+import { Theme } from "styles/types";
 
 interface IProps {
   backgroundColor: string;
@@ -8,9 +9,27 @@ interface IProps {
 
 export default function LogoMain({ backgroundColor }: IProps): JSX.Element {
   return (
-    <div style={{ backgroundColor }} className={styles.logo}>
-      <img className={styles.logoImage} src={logo} alt="logo" />
-      <div className={styles.logoText}>מועמדים לרפואה בישראל</div>
-    </div>
+    <DivWrapper style={{ backgroundColor }}>
+      <ImgLogo src={logo} alt="logo" />
+      <DivLogoText>מועמדים לרפואה בישראל</DivLogoText>
+    </DivWrapper>
   );
 }
+
+const DivWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 1rem;
+  color: ${(props: Theme) => props.theme.colors.inverse};
+`;
+
+const ImgLogo = styled.img`
+  height: 50px;   
+`;
+
+const DivLogoText = styled.div`
+  color: ${(props: Theme) => props.theme.colors.inverse};
+  font-size: 2.5rem;
+  margin-right: 1rem;
+`;

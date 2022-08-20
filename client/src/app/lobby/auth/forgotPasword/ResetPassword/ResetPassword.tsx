@@ -4,7 +4,7 @@ import { Status } from "forms/useForm";
 import React from "react";
 import { useRecoilValueLoadable } from "recoil";
 import { resetPasswordAtom } from "store/auth/atoms";
-import styles from "./ResetPassword.module.scss";
+import styled from "styled-components";
 import ResetPasswordForm from "./ResetPasswordForm";
 // import ResetPasswordStatuses from "./ResetPasswordStatuses";
 
@@ -13,12 +13,18 @@ export default function ResetPassword(): JSX.Element {
   return (
     <div>
       <LogoMain backgroundColor="#ffffff" />
-      <div className={styles.resetPassword}>
+      <Wrapper>
         <Typography variant="h1">איפוס סיסמה</Typography>
         {!status.state || status.state === Status.Loading
           ? <></>
           : <ResetPasswordForm />}
-      </div>
+      </Wrapper>
     </div>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
