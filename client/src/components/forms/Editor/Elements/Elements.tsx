@@ -1,3 +1,4 @@
+import Typography from "components/typography/Typography";
 import React from "react";
 import { RenderElementProps } from "slate-react";
 
@@ -10,6 +11,14 @@ const CodeElement = ({
   </pre>
 );
 
+const BoldElementInline = ({
+  children,
+}: RenderElementProps): JSX.Element => (
+  <Typography variant="bold">
+    {children}
+  </Typography>
+);
+
 const DefaultElement = ({
   attributes,
   children,
@@ -19,5 +28,6 @@ const DefaultElement = ({
 
 export {
   CodeElement,
+  BoldElementInline,
   DefaultElement,
 };

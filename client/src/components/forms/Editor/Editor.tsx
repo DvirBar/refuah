@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { createEditor } from "slate";
-import { withReact } from "slate-react";
+import { createEditor, Descendant } from "slate";
+import { Slate, withReact } from "slate-react";
 import EditorBody from "./EditorBody/EditorBody";
+
+const initialValue: Descendant[] = [];
 
 function Editor(): JSX.Element {
   const [editor] = useState(() => withReact(createEditor()));
 
   return (
-    <div>
-      <EditorBody editor={editor} />
-    </div>
+    <Slate editor={editor} value={initialValue}>
+      <EditorBody />
+    </Slate>
   );
 }
 

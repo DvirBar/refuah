@@ -1,5 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Edit } from "react-feather";
 import EditorToolBarButton from "./EditorToolBarButton";
 
 export default {
@@ -10,6 +11,8 @@ export default {
   )],
 } as ComponentMeta<typeof EditorToolBarButton>;
 
-const Template: ComponentStory<typeof EditorToolBarButton> = () => <EditorToolBarButton />;
+const Template: ComponentStory<typeof EditorToolBarButton> = () => (
+  <EditorToolBarButton icon={<Edit size={16} />} />
+);
 
 export const EditorToolBarButtonMain = Template.bind({});

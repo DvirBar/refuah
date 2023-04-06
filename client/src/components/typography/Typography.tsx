@@ -23,6 +23,8 @@ export default function Typography({
       return <StyleSubtitle className={className}>{children}</StyleSubtitle>;
     case "content":
       return <StyleContent className={className}>{children}</StyleContent>;
+    case "bold":
+      return <StyleBold className={className}>{children}</StyleBold>;
     default:
       return null;
   }
@@ -51,4 +53,8 @@ const StyleSubtitle = styled.div`
 
 const StyleContent = styled.div`
   font-weight: 300;
+`;
+
+const StyleBold = styled.span`
+  font-weight: 600;
 `;

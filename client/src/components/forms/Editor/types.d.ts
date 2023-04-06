@@ -21,8 +21,23 @@ export type CodeElement = {
     children: CustomText[]
 }
 
-export type CustomElement = ParagraphElement | HeadingElement | CodeElement;
-export type EditorType = BaseEditor & ReactEditor
+export type BoldInlineElement = {
+    type: "bold"
+    children: CustomText[]
+}
+
+export type CustomElement =
+    ParagraphElement |
+    HeadingElement |
+    CodeElement |
+    BoldInlineElement;
+
+interface CustomBaseEditor extends BaseEditor {
+    text?: string;
+    bold?: boolean | null;
+}
+
+export type EditorType = CustomBaseEditor & ReactEditor
 
 declare module "slate" {
     interface CustomTypes {

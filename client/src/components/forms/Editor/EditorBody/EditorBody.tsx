@@ -1,19 +1,14 @@
 import React, { useCallback } from "react";
-import { Descendant } from "slate";
 import {
-  DefaultElement, Editable, ReactEditor, RenderElementProps, Slate,
+  DefaultElement, Editable, RenderElementProps,
 } from "slate-react";
-import { CodeElement } from "../Elements/Elements";
+import { BoldElementInline, CodeElement } from "../Elements/Elements";
 
-export interface EditorBodyProps {
-    editor: ReactEditor
-}
-
-const initialValue: Descendant[] = [];
-
-function EditorBody({ editor }: EditorBodyProps): JSX.Element {
+function EditorBody(): JSX.Element {
   const renderElement = useCallback((props: RenderElementProps) => {
     switch (props.element.type) {
+      case "bold":
+        return <BoldElementInline {...props} />;
       case "code":
         return <CodeElement {...props} />;
       default:
@@ -22,11 +17,9 @@ function EditorBody({ editor }: EditorBodyProps): JSX.Element {
   }, []);
 
   return (
-    <Slate editor={editor} value={initialValue}>
-      <Editable
-        renderElement={renderElement}
-      />
-    </Slate>
+    <Editable
+      renderElement={renderElement}
+    />
   );
 }
 
